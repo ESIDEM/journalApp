@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Journal App</string>
+    <string name="action_settings">Settings</string>
+    <string name="login_failed">Login Failed</string>
+    <string name="login_successful">Login successful</string>
+    <string name="clint_id">303241795575-5cllilo259eg8m94n3ph51ni6kri2nl3.apps.googleusercontent.com</string>
+</resources>
