@@ -4,4 +4,7 @@
     <string name="login_failed">Login Failed</string>
     <string name="login_successful">Login successful</string>
     <string name="clint_id">303241795575-5cllilo259eg8m94n3ph51ni6kri2nl3.apps.googleusercontent.com</string>
+    <string name="memory_details">Memory Details</string>
+    <string name="memory_title">Memory Title</string>
+    <string name="add_memory">Add Memory</string>
 </resources>
