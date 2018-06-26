@@ -13,16 +13,17 @@ public class AddJournalActivityViewModel extends AndroidViewModel {
 
 
     DatabaseReference myRef;
+    DatabaseReference mDatabaseReference;
 
     public AddJournalActivityViewModel(@NonNull Application application) {
         super(application);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-         myRef = database.getReference("journals");
+       myRef = FirebaseDatabase.getInstance().getReference();
+         mDatabaseReference = FirebaseDatabase.getInstance().getReference("journals");
     }
 
     public void addTofirebaseDatabase(Journal journal, String uid){
 
-        myRef.child(uid).setValue(journal);
+        mDatabaseReference.child(uid).setValue(journal);
     }
 }

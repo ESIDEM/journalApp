@@ -5,19 +5,30 @@ public class Journal {
     public String id;
     public String body;
     public String title;
+    private String timeStamp;
 
-    public Journal(String id, String body, String title) {
+    public Journal(String id, String body, String title,String timeStamp) {
         this.id = id;
         this.body = body;
         this.title = title;
+        this.timeStamp = timeStamp;
     }
 
-    public Journal(String body, String title) {
+    public Journal(String body, String title,String timeStamp) {
         this.body = body;
         this.title = title;
+        this.timeStamp = timeStamp;
     }
 
     public Journal() {
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public String getId() {
