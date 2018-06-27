@@ -49,5 +49,6 @@ public class AddJournalActivity extends AppCompatActivity {
        AddJournalActivityViewModel viewModel= ViewModelProviders.of(this).get(AddJournalActivityViewModel.class);
        viewModel.addTofirebaseDatabase(journal,uid);
        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+       finish();
     }
 }

@@ -1,5 +1,10 @@
 package ng.com.techdepo.journalapp.pojo;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Journal {
 
     public String id;
@@ -55,5 +60,14 @@ public class Journal {
         this.title = title;
     }
 
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
 
+        result.put("body", body);
+        result.put("title", title);
+        result.put("timeStamp", timeStamp);
+
+        return result;
+    }
 }
