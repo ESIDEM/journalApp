@@ -12,12 +12,12 @@ import java.util.Map;
 @Entity (tableName = "journals")
 public class Journal {
     @PrimaryKey(autoGenerate = true)
-    public String id;
+    public int id;
     public String body;
     public String title;
     private String timeStamp;
 
-    public Journal(String id, String body, String title,String timeStamp) {
+    public Journal(int id, String body, String title,String timeStamp) {
         this.id = id;
         this.body = body;
         this.title = title;
@@ -41,11 +41,11 @@ public class Journal {
         this.timeStamp = timeStamp;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

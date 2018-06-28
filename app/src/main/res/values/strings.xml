@@ -9,4 +9,7 @@
     <string name="add_memory">Add Memory</string>
     <string name="creating_db_message">Creating new database instance</string>
     <string name="getting_db_instance_message">Getting the database instance</string>
+    <string name="memory_title">Memory Title</string>
+    <string name="time_added">time added</string>
+    <string name="memory_body">Memory body</string>
 </resources>
