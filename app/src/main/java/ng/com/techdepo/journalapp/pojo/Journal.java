@@ -1,12 +1,17 @@
 package ng.com.techdepo.journalapp.pojo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Entity (tableName = "journals")
 public class Journal {
-
+    @PrimaryKey(autoGenerate = true)
     public String id;
     public String body;
     public String title;
@@ -18,7 +23,7 @@ public class Journal {
         this.title = title;
         this.timeStamp = timeStamp;
     }
-
+    @Ignore
     public Journal(String body, String title,String timeStamp) {
         this.body = body;
         this.title = title;
