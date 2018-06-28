@@ -32,6 +32,8 @@ public class AddJournalActivity extends AppCompatActivity {
         editTextTitle = (TextInputEditText) findViewById(R.id.journal_title_edit_text);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+
+
     }
 
 

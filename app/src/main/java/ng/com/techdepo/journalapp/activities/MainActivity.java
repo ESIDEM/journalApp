@@ -1,10 +1,14 @@
 package ng.com.techdepo.journalapp.activities;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -12,13 +16,25 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import java.util.ArrayList;
+import java.util.List;
 
 import ng.com.techdepo.journalapp.R;
+import ng.com.techdepo.journalapp.adapters.JournalAdapter;
+import ng.com.techdepo.journalapp.pojo.Journal;
+import ng.com.techdepo.journalapp.viewmodels.AddJournalActivityViewModel;
+import ng.com.techdepo.journalapp.viewmodels.MainActivityViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements JournalAdapter.ItemClickListener{
 
     FirebaseUser currentUser;
     private FirebaseAuth mAuth;
+    JournalAdapter mJournalAdapter;
+    RecyclerView mRecyclerView;
+    DatabaseReference myRef;
+    DatabaseReference mDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +50,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),AddJournalActivity.class));
             }
         });
+        myRef = FirebaseDatabase.getInstance().getReference();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("journals");
 
         mAuth = FirebaseAuth.getInstance();
+        mRecyclerView = (RecyclerView) findViewById(R.id.all_memoriew_list_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mJournalAdapter = new JournalAdapter(this,this);
+        mRecyclerView.setAdapter(mJournalAdapter);
+
+        AddJournalActivityViewModel viewModel= ViewModelProviders.of(this).get(AddJournalActivityViewModel.class);
+        viewModel.insertToRoom();
+
+       setupViewModel();
 
             }
 
@@ -69,5 +96,22 @@ public class MainActivity extends AppCompatActivity {
         if(currentUser==null){
             startActivity(new Intent(getApplicationContext(),SignInActivity.class));
         }
+
+            }
+
+    private void setupViewModel() {
+        MainActivityViewModel viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        viewModel.getJournal().observe(this, new Observer<List<Journal>>() {
+            @Override
+            public void onChanged(@Nullable List<Journal> guestkEntries) {
+
+                mJournalAdapter.setTasks(guestkEntries);
+            }
+        });
+    }
+
+    @Override
+    public void onItemClickListener(int itemId) {
+
     }
 }
