@@ -3,6 +3,7 @@ package ng.com.techdepo.journalapp.pojo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import com.google.firebase.database.Exclude;
 
@@ -11,14 +12,17 @@ import java.util.Map;
 
 @Entity (tableName = "journals")
 public class Journal {
-    @PrimaryKey(autoGenerate = true)
+
+
+    @PrimaryKey @NonNull
+   public String uid;
     public int id;
     public String body;
     public String title;
     private String timeStamp;
 
-    public Journal(int id, String body, String title,String timeStamp) {
-        this.id = id;
+    public Journal(String uid, String body, String title,String timeStamp) {
+        this.uid = uid;
         this.body = body;
         this.title = title;
         this.timeStamp = timeStamp;
@@ -31,6 +35,14 @@ public class Journal {
     }
 
     public Journal() {
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(@NonNull String uid) {
+        this.uid = uid;
     }
 
     public String getTimeStamp() {

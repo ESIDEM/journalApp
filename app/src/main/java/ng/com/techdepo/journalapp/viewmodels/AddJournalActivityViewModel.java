@@ -47,7 +47,6 @@ public class AddJournalActivityViewModel extends AndroidViewModel {
 
 
 
-        // mDatabaseReference.child(uid).setValue(journal);
     }
 
     public void insertToRoom(){
@@ -57,12 +56,10 @@ public class AddJournalActivityViewModel extends AndroidViewModel {
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // journalList.clear();
                 for (DataSnapshot journalSnapshot: dataSnapshot.getChildren()){
 
                     Journal journal = journalSnapshot.getValue(Journal.class);
-                    //journalList.add(journal);
-                   // appDatabase.memoryDAO().insertJournal(journal);
+                    journal.setUid(journalSnapshot.getKey());
                     insertItem(journal);
 
 

@@ -17,7 +17,7 @@ public interface MemoryDAO {
     @Query("SELECT * FROM journals ORDER BY timeStamp")
     LiveData<List<Journal>> getAllJournals();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertJournal(Journal journal);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)

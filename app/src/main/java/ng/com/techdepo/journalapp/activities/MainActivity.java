@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import java.util.ArrayList;
 import java.util.List;
 
 import ng.com.techdepo.journalapp.R;
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.It
     RecyclerView mRecyclerView;
     DatabaseReference myRef;
     DatabaseReference mDatabaseReference;
+    LinearLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.It
                 startActivity(new Intent(getApplicationContext(),AddJournalActivity.class));
             }
         });
+        layoutManager = new LinearLayoutManager(this);
         myRef = FirebaseDatabase.getInstance().getReference();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("journals");
 
@@ -58,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.It
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mJournalAdapter = new JournalAdapter(this,this);
         mRecyclerView.setAdapter(mJournalAdapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(),layoutManager.getOrientation());
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         AddJournalActivityViewModel viewModel= ViewModelProviders.of(this).get(AddJournalActivityViewModel.class);
         viewModel.insertToRoom();
