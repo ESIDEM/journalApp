@@ -41,7 +41,7 @@ public class AddJournalActivity extends AppCompatActivity {
 
         String title = editTextTitle.getText().toString();
         String details = editTextDetail.getText().toString();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date date = new Date();
         String timestamp = dateFormat.format(date);
 
